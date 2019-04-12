@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -8,14 +8,14 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab2Page {
 
-  constructor(private alertCtrl: AlertController){};
+  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController){};
 
   async showAdd(){
     const alert = await this.alertCtrl.create({
       header: 'O que deseja fazer?',
       inputs: [
         {
-          name: 'taskToDo',
+          name: 'Tarefa',
           type: 'text',
           placeholder: 'Comprar pão',
         }
@@ -27,9 +27,29 @@ export class Tab2Page {
           handler: () => {
             console.log('Click cancel');
           }
+       },
+       {
+         text: 'Adicionar',
+         handler: (form) => {
+           this.addTarefa(form.Tarefa);
+         }
        }
     ]
     });
+    await alert.present();
+  }
+
+   async addTarefa(Tarefa: string){
+    if(Tarefa.trim().length < 1){
+      const toast = await this.toastCtrl.create({
+        message: 'Informe dados válidos!',
+        position: 'top',
+        duration: 2000
+        
+      });
+      
+      await toast.present();
+    }
   }
 
 }
