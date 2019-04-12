@@ -7,7 +7,8 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
+   
+  tasks: any[] = [];
   constructor(private alertCtrl: AlertController, private toastCtrl: ToastController){};
 
   async showAdd(){
@@ -50,6 +51,10 @@ export class Tab2Page {
       
       await toast.present();
     }
+
+    let tasks = {nome: Tarefa, done: false}
+    this.tasks.push(tasks);
+
   }
 
 }
