@@ -14,7 +14,7 @@
     </ion-item>
   </ion-list>
   <ion-item-sliding *ngFor="let task of tasks">
-    <ion-item>
+    <ion-item (click)="openAction(task)">
       <ion-label>{{ task.nome }}</ion-label>
       <ion-icon *ngIf="!task.done" name="square-outline" slot="start"></ion-icon>
       <ion-icon *ngIf="task.done" name="checkbox-outline"></ion-icon>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -9,7 +9,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class Tab2Page {
    
   tasks: any[] = [];
-  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController){};
+  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController, private actionSheetCtrl: ActionSheetController){};
 
   async showAdd(){
     const alert = await this.alertCtrl.create({
@@ -56,6 +56,19 @@ export class Tab2Page {
     let task = {nome: Tarefa, done: false}
     this.tasks.push(task);
 
+  }
+
+  async openAction(task: any){
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: "O que deseja fazer?",
+      buttons: [{
+        text: task.done ? 'Desmarcar' : 'Marcar',
+        icon: task.done ? 'radio-button-off' : 'checkmark-circle',
+        handler: () => {
+          task.done = !task.done;
+        }
+      }]
+    });
   }
 
 }
