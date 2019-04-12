@@ -7,6 +7,20 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-list no-lines>
+    <ion-item *ngIf="tasks.length < 1">
+      <ion-label text-center text-uppercase>Não Há tarefas</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item-sliding *ngFor="let task of tasks">
+    <ion-item>
+      <ion-label>{{ task.nome }}</ion-label>
+      <ion-icon *ngIf="!task.done" name="square-outline" slot="start"></ion-icon>
+      <ion-icon *ngIf="task.done" name="checkbox-outline"></ion-icon>
+    </ion-item>
+  </ion-item-sliding>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click) = "showAdd();">
       <ion-icon name="add"></ion-icon>

@@ -50,10 +50,11 @@ export class Tab2Page {
       });
       
       await toast.present();
+      return;
     }
 
-    let tasks = {nome: Tarefa, done: false}
-    this.tasks.push(tasks);
+    let task = {nome: Tarefa, done: false}
+    this.tasks.push(task);
 
   }
 
